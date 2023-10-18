@@ -3,6 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Évolution et taxomonie | Projet dont vous êtes le héros</title>
+        <base target="_blank">
+        <script src="js/javascript.js"></script>
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
@@ -12,32 +14,32 @@
             <h5 style="padding-top: 10px;"><i>par Nathan, Mark, Reza, Samuel</i></h5>
         </div>
     
-        <div class="chatbot" style="float: right;">
+        <div class="chatbot">
             <div class="chat">
-                <div class="chat-messages">
+                <div class="chat-messages" id="chatcontainer">
                     <div class="chat-wrapper" id="AI">
                         <div class="pfp-chat">
                             <img src="assets/robot.svg" alt="robot pfp" style="width: 35px;height: 35px;"></img>
                         </div>
                         <p style="display: inline-block;padding-top: 0;">Salut! Je suis l'IA de ce site. Comment puis-je vous aider?</p>
                     </div>
-                    <div class="chat-wrapper" id="USER">
-                        <div class="pfp-chat">
-                            <img src="assets/robot.svg" alt="user pfp" style="width: 35px;height: 35px;"></img>
-                        </div>
-                        <p style="display: inline-block;padding-top: 0;">Salut! Je suis l'IA de ce site. Comment puis-je vous aider?</p>
-                    </div>
+                    
                 </div>
-                
-                <div class="">
-
+                <div class="chat-input">
+                    <textarea class="text-ai-input" style="width: 84%;box-sizing: border-box;padding-bottom: 20px;" id="textboxAI"></textarea>
+                    <button style="border: none; padding: 10px;width: 40px;height: 40px;border-radius: 10px;" id="sendAI">
+                        <img src="assets/send.svg" alt="send icon" style="width: 20px; height: 20px;" id="sendAIImg">
+                    </button>
                 </div>
             </div>
-            <img src="assets/chaticon.svg" alt="chat icon" style="width: 50px;height: 50px;"></img>
+            
+            <img src="assets/chaticon.svg" alt="chat icon" style="width: 45px;height: 45px;"></img>
         </div>
     
         <div class="attribution">
-            <p>Icones provenant de <a href="https://iconfinder.com">iconfinder</a> </p>
+            <p>Icones provenant de <a href="https://iconfinder.com">iconfinder</a><br>Site web fait par Nathan, <a href="https://github.com/notpoiu/sitewebscience/tree/main">code source sur <span style="display: inline-flex; align-items: center;">Github <img src="assets/gitbub.svg" alt="GitHub logo" style="width: 15px; height: 15px; margin-left: 5px;"></span></a></p>
         </div>
+        
+       
     </body>
 </html>
