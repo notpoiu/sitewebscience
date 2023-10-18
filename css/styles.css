@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+a {
+    text-decoration: none;
+    color: turquoise;
+}
+
+.attribution {
+    position: absolute;
+    bottom: 15px;
+    left: 5px;
+    font-size: 12px;
+    color: white;
+    text-decoration: none;
+}
+
+
+.centertitle {
+    padding-top: 10px;
+    text-align: center;
+    line-height: 0.3;
+}
+
+.chatbot {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+
+    right: 10px;
+    bottom: 10px;
+}
+
+.chatbot >* {
+    padding-left: 10px;
+    padding-top: 10px;
+    position: relative;
+}
+
+.chat-messages>* {
+    padding-top: 15px;
+    padding-left: 5px;
+}
+
+.chatbot>*:last-child {
+    margin-top: 10px;
+    align-self: flex-end;
+}
+
+.chatbot > .chat {
+    width: 300px;
+    height: 400px;
+    background-color: #434C5E;
+    border-radius: 5px;
+}
+
+.pfp-chat {
+    background-color: black;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.chat-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.chat-wrapper p {
+    margin: 0;
+    padding-left: 10px;
+}
+
+.pfp-chat img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40px;
+    height: 40px;
+}
+
+.chatbot > .chat > .chat-messages {
+    height: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.chatbot > .chat > .chat-messages::-webkit-scrollbar {
+    display: none;
+}
