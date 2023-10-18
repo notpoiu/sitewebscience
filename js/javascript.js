@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer upio-7cIzgWvo9V-OydbP1YBGP"
+                "Authorization": "Bearer "
             }
         }).then(response => response.json()).then(response => {
             let chatWrapper = createChatDiv(response["message"], "AI");
