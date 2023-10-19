@@ -1,21 +1,3 @@
-/*
-template for chat
-<div class="chat-wrapper" id="AI">
-    <div class="pfp-chat">
-        <img src="assets/robot.svg" alt="robot pfp" style="width: 35px;height: 35px;"></img>
-    </div>
-    <p style="display: inline-block;padding-top: 0;">Salut! Je suis l'IA de ce site. Comment puis-je vous aider?</p>
-</div>
-
-
-<div class="chat-wrapper" id="USER">
-    <div class="pfp-chat">
-        <img src="assets/user.svg" alt="user pfp" style="width: 35px;height: 35px;"></img>
-    </div>
-    <p style="display: inline-block;padding-top: 0;">pluh</p>
-</div>
-*/
-
 function createChatDiv(message, id){
     let pfp = "";
 
@@ -38,16 +20,73 @@ function createChatDiv(message, id){
     img.style.width = "35px";
     img.style.height = "35px";
 
+    let div = document.createElement("div");
+    div.style.width = "90%";
+    div.style.alignItems = "center";
+    div.style.textAlign = "left";
+
     let p = document.createElement("p");
     p.style.display = "inline-block";
     p.style.paddingTop = "0";
     p.innerHTML = message;
 
-    pfpChat.appendChild(img);
     chatWrapper.appendChild(pfpChat);
-    chatWrapper.appendChild(p);
+    chatWrapper.appendChild(div);
+    pfpChat.appendChild(img);
+    div.appendChild(p);
 
     return chatWrapper;
+}
+
+function clearChat() {
+    let chat = document.querySelector("#chatcontainer");
+    chat.innerHTML = "";
+
+    let chatWrapper = createChatDiv("Salut! Je suis l'IA de ce site. Comment puis-je vous aider?", "AI");
+    chat.appendChild(chatWrapper);
+}
+
+function addToLocalStorageHistory(message,id) {
+    let history = localStorage.getItem("history");
+
+    if (history == null) {
+        history = [];
+    }
+    else {
+        history = JSON.parse(history);
+    }
+
+    history.push({
+        "message": message,
+        "id": id
+    });
+
+    localStorage.setItem("history", JSON.stringify(history));
+    return true;
+}
+
+function loadHistory() {
+    let history = localStorage.getItem("history");
+
+    if (history == null) {
+        history = [];
+    }
+    else {
+        history = JSON.parse(history);
+    }
+
+    let chat = document.querySelector("#chatcontainer");
+    chat.innerHTML = "";
+
+    let chatWrapper = createChatDiv("Salut! Je suis l'IA de ce site. Comment puis-je vous aider?", "AI");
+    chat.appendChild(chatWrapper);
+
+    for (let i = 0; i < history.length; i++) {
+        let chatWrapper = createChatDiv(history[i]["message"], history[i]["id"]);
+        chat.appendChild(chatWrapper);
+    }
+
+    return true;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -56,6 +95,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let sendAIImg = document.querySelector("#sendAIImg");
     let chat = document.querySelector("#chatcontainer");
     let isLoadingResponse = false;
+
+    loadHistory();
 
     button.onclick = function() {
         if (isLoadingResponse) {
@@ -68,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let chatWrapper = createChatDiv(userPrompt, "USER");
         chat.appendChild(chatWrapper);
         
+        addToLocalStorageHistory(userPrompt, "USER");
 
         isLoadingResponse = true;
         sendAIImg.src = "assets/loading.svg";
@@ -79,19 +121,23 @@ document.addEventListener("DOMContentLoaded", function() {
             }),
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer upio-7cIzgWvo9V-OydbP1YBGP"
+                "Authorization": "Bearer "
             }
         }).then(response => response.json()).then(response => {
             let chatWrapper = createChatDiv(response["message"], "AI");
             chat.appendChild(chatWrapper);
             isLoadingResponse = false;
             sendAIImg.src = "assets/send.svg";
+
+            addToLocalStorageHistory(response["message"], "AI");
         }).catch(error => {
             console.log(error);
             let chatWrapper = createChatDiv("Une erreur s'est produite. Veuillez réessayer.", "AI");
             chat.appendChild(chatWrapper);
             isLoadingResponse = false;
             sendAIImg.src = "assets/send.svg";
+
+            addToLocalStorageHistory("Une erreur s'est produite. Veuillez réessayer.", "AI");
         });
     }
 });

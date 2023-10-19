@@ -73,6 +73,10 @@ a {
     align-items: center;
 }
 
+.chat-wrapper>*:first-child {
+    align-self: flex-start;
+}
+
 .chat-wrapper p {
     margin: 0;
     padding-left: 10px;
