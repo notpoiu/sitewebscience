@@ -47,7 +47,7 @@ function clearChat() {
 
     let chatWrapper = createChatDiv("Salut! Je suis l'IA de ce site. Comment puis-je vous aider?", "AI");
     chat.appendChild(chatWrapper);
-
+    
     chat.scrollTop = chat.scrollHeight;
     localStorage.setItem("history", JSON.stringify(history));
 }
@@ -71,6 +71,23 @@ function addToLocalStorageHistory(message,id) {
     return true;
 }
 
+
+function setChatOpened(bool){
+    localStorage.setItem("isChatOpen", bool);
+}
+
+function getChatOpened(){
+    let isChatOpen = localStorage.getItem("isChatOpen");
+
+    if (isChatOpen == null){
+        isChatOpen = false;
+
+        localStorage.setItem("isChatOpen",isChatOpen)
+    }
+
+    return isChatOpen;
+}
+
 function loadHistory() {
     let history = localStorage.getItem("history");
 
@@ -92,8 +109,6 @@ function loadHistory() {
         chat.appendChild(chatWrapper);
     }
 
-    chat.scrollTop = chat.scrollHeight;
-
     return true;
 }
 
@@ -103,9 +118,16 @@ document.addEventListener("DOMContentLoaded", function() {
     let sendAIImg = document.querySelector("#sendAIImg");
     let chat = document.querySelector("#chatcontainer");
     let reloadChat = document.querySelector("#reloadChat");
+    let chatbotMostlyMainDiv = document.querySelector("#chatbotMostlyMainDiv");
+    let chatBtn = document.querySelector("#chatbtn");
     let isLoadingResponse = false;
 
     loadHistory();
+
+    if (getChatOpened() == 'true'){
+        chatbotMostlyMainDiv.style.display = "block";
+        chat.scrollTop = chat.scrollHeight;
+    }
 
     reloadChat.onclick = function() {
         clearChat();
@@ -117,6 +139,12 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
         let userPrompt = textbox.value;
+
+        if (userPrompt.length > 75) {
+            alert("Svp écrivez un message plus pettit.");
+            return;
+        }
+
         textbox.value = "";
 
         let chatWrapper = createChatDiv(userPrompt, "USER");
@@ -153,5 +181,16 @@ document.addEventListener("DOMContentLoaded", function() {
             chat.scrollTop = chat.scrollHeight;
             addToLocalStorageHistory("Une erreur s'est produite. Veuillez réessayer.", "AI");
         });
+    }
+
+    chatBtn.onclick = function() {
+        if (chatbotMostlyMainDiv.style.display == "none") {
+            setChatOpened(true);
+            chatbotMostlyMainDiv.style.display = "block";
+            chat.scrollTop = chat.scrollHeight;
+        } else {
+            setChatOpened(false);
+            chatbotMostlyMainDiv.style.display = "none";
+        }
     }
 });
