@@ -42,8 +42,14 @@ function clearChat() {
     let chat = document.querySelector("#chatcontainer");
     chat.innerHTML = "";
 
+    let history = localStorage.getItem("history");
+    history = [];
+
     let chatWrapper = createChatDiv("Salut! Je suis l'IA de ce site. Comment puis-je vous aider?", "AI");
     chat.appendChild(chatWrapper);
+
+    chat.scrollTop = chat.scrollHeight;
+    localStorage.setItem("history", JSON.stringify(history));
 }
 
 function addToLocalStorageHistory(message,id) {
@@ -86,6 +92,8 @@ function loadHistory() {
         chat.appendChild(chatWrapper);
     }
 
+    chat.scrollTop = chat.scrollHeight;
+
     return true;
 }
 
@@ -94,9 +102,14 @@ document.addEventListener("DOMContentLoaded", function() {
     let button = document.querySelector("#sendAI");
     let sendAIImg = document.querySelector("#sendAIImg");
     let chat = document.querySelector("#chatcontainer");
+    let reloadChat = document.querySelector("#reloadChat");
     let isLoadingResponse = false;
 
     loadHistory();
+
+    reloadChat.onclick = function() {
+        clearChat();
+    }	
 
     button.onclick = function() {
         if (isLoadingResponse) {
@@ -110,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function() {
         chat.appendChild(chatWrapper);
         
         addToLocalStorageHistory(userPrompt, "USER");
+        chat.scrollTop = chat.scrollHeight;
 
         isLoadingResponse = true;
         sendAIImg.src = "assets/loading.svg";
@@ -128,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
             chat.appendChild(chatWrapper);
             isLoadingResponse = false;
             sendAIImg.src = "assets/send.svg";
-
+            chat.scrollTop = chat.scrollHeight;
             addToLocalStorageHistory(response["message"], "AI");
         }).catch(error => {
             console.log(error);
@@ -136,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function() {
             chat.appendChild(chatWrapper);
             isLoadingResponse = false;
             sendAIImg.src = "assets/send.svg";
-
+            chat.scrollTop = chat.scrollHeight;
             addToLocalStorageHistory("Une erreur s'est produite. Veuillez réessayer.", "AI");
         });
     }
