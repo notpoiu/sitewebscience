@@ -26,9 +26,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     textToDisplay = "# " + articleFile.split(".")[0] +"\nCet article ne contient pas de texte pour le moment, revenez plus tard!";
                 }
 
-                let add = "<hr>";
-                if (i == 0){
-                    add = "";
+                let add = "";
+                if (!(article.innerHTML == '' || article.innerHTML == null || article.innerHTML == undefined || i == 0)){
+                    add = '<hr>';
                 }
 
                 article.innerHTML = article.innerHTML + add+ formatText(textToDisplay);
