@@ -21,12 +21,17 @@ document.addEventListener("DOMContentLoaded", function() {
         fetch("articles/"+articleFile)
             .then(response => response.text())
             .then(text => {
+                let textToDisplay = text;
+                if (text == null || text == undefined || text == ''){
+                    textToDisplay = "# " + articleFile.split(".")[0] +"\nCet article ne contient pas de texte pour le moment, revenez plus tard!";
+                }
+
                 let add = "<hr>";
                 if (i == 0){
                     add = "";
                 }
 
-                article.innerHTML = article.innerHTML + add+ formatText(text);
+                article.innerHTML = article.innerHTML + add+ formatText(textToDisplay);
             })
             .catch(err => console.log(err));
     }
