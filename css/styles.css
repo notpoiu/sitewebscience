@@ -77,6 +77,16 @@ a {
     align-self: flex-start;
 }
 
+.glass {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1.8px);
+    -webkit-backdrop-filter: blur(1.8px);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+}
+
 .chat-wrapper p {
     margin: 0;
     padding-left: 10px;
@@ -93,7 +103,6 @@ a {
 }
 
 .chatbot > .chat > .chat-messages {
-    
     height: 85%;
     overflow-y: scroll;
     -ms-overflow-style: none;
@@ -103,6 +112,20 @@ a {
 .chatbot > .chat > .chat-messages::-webkit-scrollbar {
     display: none;
 }
+
+#mdArticle {
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    max-height: 450px;
+    min-height: none;
+    height: auto;
+    scrollbar-width: none;
+}
+
+#mdArticle::-webkit-scrollbar {
+    display: none;
+}
+
 
 .text-ai-input {
     width: 100%;

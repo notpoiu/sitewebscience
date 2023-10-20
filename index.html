@@ -4,7 +4,12 @@
         <meta charset="UTF-8">
         <title>Évolution et taxomonie | Projet dont vous êtes le héros</title>
         <base target="_blank">
-        <script src="js/javascript.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.2/markdown-it.min.js"></script>
+        <script src="js/chatbot.js"></script>
+        <script src="js/article.js"></script>
+
         <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
@@ -13,6 +18,12 @@
             <h3>La base du progrès humain</h3>
             <h5 style="padding-top: 10px;"><i>par Nathan, Mark, Reza, Samuel</i></h5>
         </div>
+
+        <article style="display: flex; justify-content: center; align-items: center;">
+            <div class="glass" style="width: 50%; height: 50%; display: flex; justify-content: center;">
+                <div style="width: 90%; height: 100%;" id="mdArticle"></div>
+            </div>
+        </article>
     
         <div class="chatbot">
             <div class="chat" id="chatbotMostlyMainDiv" style="display: none;">
@@ -45,7 +56,5 @@
         <div class="attribution">
             <p>Icones provenant de <a href="https://iconfinder.com">iconfinder</a><br>Site web fait par Nathan, <a href="https://github.com/notpoiu/sitewebscience/tree/main">code source sur <span style="display: inline-flex; align-items: center;">Github <img src="assets/gitbub.svg" alt="GitHub logo" style="width: 15px; height: 15px; margin-left: 5px;"></span></a></p>
         </div>
-        
-       
     </body>
 </html>

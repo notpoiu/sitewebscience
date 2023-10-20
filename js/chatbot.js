@@ -112,6 +112,7 @@ function loadHistory() {
     return true;
 }
 
+
 document.addEventListener("DOMContentLoaded", function() {
     let textbox = document.querySelector("#textboxAI");
     let button = document.querySelector("#sendAI");
