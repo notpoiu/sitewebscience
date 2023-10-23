@@ -24,8 +24,23 @@ a {
 .centertitle {
     padding-top: 10px;
     text-align: center;
-    line-height: 0.3;
 }
+
+.centertitle h1,
+.centertitle h3,
+.centertitle h5 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.centertitle>*:first-child {
+    margin-top: 30px;
+}
+
+.centertitle>*:last-child {
+    margin-bottom: 30px;
+}
+
 
 .chatbot {
     position: absolute;
