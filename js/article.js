@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     for (let i = 0; i < Object.keys(articleDict).length; i++) {
         let articleFile = articleDict[i]["file"];
-        console.log(articleFile);
         fetch("articles/"+articleFile)
             .then(response => response.text())
             .then(text => {

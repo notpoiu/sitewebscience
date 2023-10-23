@@ -28,7 +28,7 @@ function createChatDiv(message, id){
     let p = document.createElement("p");
     p.style.display = "inline-block";
     p.style.paddingTop = "0";
-    p.innerHTML = message;
+    p.innerHTML = message.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
     chatWrapper.appendChild(pfpChat);
     chatWrapper.appendChild(div);
@@ -129,6 +129,13 @@ document.addEventListener("DOMContentLoaded", function() {
         chatbotMostlyMainDiv.style.display = "block";
         chat.scrollTop = chat.scrollHeight;
     }
+
+    textbox.addEventListener("keydown", function(event) {
+        if (event.keyCode === 13 && !event.shiftKey) {
+            event.preventDefault();
+            button.click();
+        }
+    });
 
     reloadChat.onclick = function() {
         clearChat();
