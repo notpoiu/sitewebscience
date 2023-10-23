@@ -4,6 +4,7 @@ body {
     background-color: black;
     color: white;
     font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -19,7 +20,6 @@ a {
     color: white;
     text-decoration: none;
 }
-
 
 .centertitle {
     padding-top: 10px;
