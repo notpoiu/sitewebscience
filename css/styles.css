@@ -90,6 +90,7 @@ a {
 .chat-wrapper {
     display: flex;
     align-items: center;
+    
 }
 
 .chat-wrapper>*:first-child {
