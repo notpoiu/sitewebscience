@@ -110,7 +110,7 @@ function loadHistory() {
     let chat = document.querySelector("#chatcontainer");
     chat.innerHTML = "";
 
-    let chatWrapper = createChatDiv("Salut! Je suis l'IA de ce site. Comment puis-je vous aider?", "AI");
+    let chatWrapper = createChatDiv("Salut! Je suis l'IA de ce site. Comment puis-je vous aidez?", "AI");
     chat.appendChild(chatWrapper);
 
     for (let i = 0; i < history.length; i++) {
