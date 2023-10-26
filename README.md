@@ -1,3 +1,3 @@
-# Site web science
-un projet de site web pour mon cours de science
-a website for my science project.
+# Site web science backend
+this is the source code of the backend/server for the website
+le code source du backend/serveur du site web
