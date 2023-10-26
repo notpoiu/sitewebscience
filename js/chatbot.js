@@ -55,7 +55,7 @@ function clearChat() {
     let history = localStorage.getItem("history");
     history = [];
 
-    let chatWrapper = createChatDiv("Salut! Je suis l'IA de ce site. Comment puis-je vous aider?", "AI");
+    let chatWrapper = createChatDiv("Salut! Je suis l'IA de ce site. Comment puis-je vous aidez?", "AI");
     chat.appendChild(chatWrapper);
     
     chat.scrollTop = chat.scrollHeight;
