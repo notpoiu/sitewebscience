@@ -123,16 +123,49 @@ function loadHistory() {
 
 /* Typing thing function */
 
-let messageQueue = [];
+let messageQueue = {
+    queues: {
+        // template queue, just placeholder, wont be used
+        ['uniqueid']: {
+            queue: [],
+            isProcessingQueue: false
+        }
+    }
+};
 let isProcessingQueue = false;
 
-function processQueue(paragraph) {
-    if (messageQueue.length > 0 && !isProcessingQueue) {
-        isProcessingQueue = true;
-        const message = messageQueue.shift();
-        typeMessage(message, paragraph, () => {
-            isProcessingQueue = false;
-            processQueue(paragraph);
+function getUniqueID(element){
+    if (!element.hasAttribute("data-unique-id") || element.getAttribute("data-unique-id") === "") {
+        var id = new Date().getTime();
+        element.setAttribute("data-unique-id", id);
+
+        messageQueue.queues[id] = {};
+        messageQueue.queues[id].queue = [];
+        messageQueue.queues[id].isProcessingQueue = false;
+    }
+    return element.getAttribute("data-unique-id");
+}
+
+function getElementFromUniqueID(id){
+    return document.querySelector(`[data-unique-id="${id}"]`);
+}
+
+
+function processQueue(paragraph,message) {
+    const id = getUniqueID(paragraph);
+
+    if (!(message == null || message == undefined)) {
+        messageQueue.queues[id].queue.push(message);
+    }
+
+    if (messageQueue.queues[id].queue.length > 0 && !messageQueue.queues[id].isProcessingQueue) {
+        messageQueue.queues[id].isProcessingQueue = true;
+        const message = messageQueue.queues[id].queue.shift();
+        const par = getElementFromUniqueID(id);
+        typeMessage(message, par, () => {
+            messageQueue.queues[id].isProcessingQueue = false;
+
+            processQueue(par);
         });
     }
 }
@@ -142,6 +175,7 @@ function typeMessage(message, element, callback) {
     
     let index = 0;
     const intervalId = setInterval(() => {
+        
         let msg = message.charAt(index);
         msg = msg.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
@@ -237,6 +271,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     const message = decoder.decode(value);
 
+                    console.log(paragraph);
                     if (message == "event: stream-ended"){
                         break;
                     }
@@ -245,8 +280,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (message.includes("event: stream-ended")) {
                         aiResponseStr += message.replace("event: stream-ended", "");
 
-                        messageQueue.push(message.replace("event: stream-ended", ""));
-                        processQueue(paragraph);
+                        processQueue(paragraph,message);
 
                         chat.scrollTop = chat.scrollHeight;
                         break;
@@ -254,8 +288,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }else{
                         aiResponseStr += message;
                         
-                        messageQueue.push(message);  
-                        processQueue(paragraph);
+                        processQueue(paragraph,message);
 
                         chat.scrollTop = chat.scrollHeight;
                     }
