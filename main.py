@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template, stream_with_context, Response
-import requests, os, json, openai
+import os, json, openai
 
 # replace os.environ with your openai key
 openai.api_key = os.environ['openaikey']
