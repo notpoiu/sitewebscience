@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(response => response.text())
             .then(text => {
                 let textToDisplay = text;
-                if (text == null || text == undefined || text == ''){
+                if (text == null || text == undefined || text == '' || text == ' '){
                     textToDisplay = "# " + articleFile.split(".")[0] +"\nCet article ne contient pas de texte pour le moment, revenez plus tard!";
                 }
 
