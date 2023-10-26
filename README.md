@@ -7,8 +7,8 @@ A website for my science project.
 **REMARQUE : l'exécution de cette opération va vous coûter de l'argent, car openai vous fait payer l'utilisation de son modèle gpt-3**.
 
 ## GPT 3.5-Turbo OpenAI backend code
-[Want to see backend code?](https://github.com/notpoiu/sitewebscience/tree/erver-backend-openai) <br>
-[Vous voulez voir le code du backend ?](https://github.com/notpoiu/sitewebscience/tree/erver-backend-openai)
+[Want to see backend code?](https://github.com/notpoiu/sitewebscience/tree/server-backend-openai) <br>
+[Vous voulez voir le code du backend ?](https://github.com/notpoiu/sitewebscience/tree/server-backend-openai)
 
 ## Free LLM backend code
 coming soon (maybe)
