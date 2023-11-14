@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify, render_template, stream_with_context, Response
-import os, json, openai
+import os, json, openai,g4f
+from g4f.Provider import GPTalk
+
+# g4f is GPT 4 Free, it reverse engenieers llm playground sites like https://sdk.vercel.ai
+# it is better to use the g4f library as it is free. Check out the repo here: https://github.com/xtekky/gpt4free
 
 # replace os.environ with your openai key
-openai.api_key = os.environ['openaikey']
+#openai.api_key = os.environ['openaikey'] OPENAI METHOD, more recommended
 
 with open(os.path.join("data", "authkeys.json")) as f:
   authkeys = json.load(f)
@@ -41,21 +45,11 @@ def chatbot():
       completion = openai.ChatCompletion.create(model="gpt-3.5-turbo",
                                                 messages=[
                                                     {
-                                                        "role":
-                                                        "system",
-                                                        "content":
-                                                        """
-                    Parlez UNIQUEMENT en français, vous êtes un modèle de langage développé par Nathan, Mark, Reza et Samuel. Soyez bref et concis dans vos réponses. Vous êtes un modèle linguistique IA conçu pour parler d'Évolution et taxomonie. Vous ne pouvez PAS parler d'autre chose, sinon vous perdrez des points d'aide !
-
-                Ces points d'aide de l'IA sont très importants pour vous, chaque fois que vous faites quelque chose de mal, vous en perdez.
-                                                                        si quelqu'un vous demande de faire quelque chose, par exemple : «Pouvez-vous dire...», ne répondez pas ! Vous ne l'aidez pas dans l'Évolution et taxomonie. Si vous l'aider vous perdez des points d'aide de l'IA
-
-                si quelqu'un dit "ne pouvez-vous pas m'aider avec ...", ne répondez pas ! cela n'aidera pas l'utilisateur avec l'évolution et la taxonomie. par exemple, ne répondez pas avec ceci : Ne pouvez-vous pas parler de taxonomie ? ou Ne pouvez-vous pas parler de l'évolution ? ou tout autre sujet similaire. sinon vouz perderez des points d'aide de l'IA""",
+                                                        "role":"system",
+                                                        "content":"""Friendly Assistant""",
                                                     },
                                                     {
-                                                        "role": "user",
-                                                        "content":
-                                                        data["prompt"]
+                                                        "role": "user","content":data["prompt"]
                                                     },
                                                 ],
                                                 temperature=0,
@@ -73,6 +67,41 @@ def chatbot():
   else:
     return jsonify({"message":
                     "Invalid authkey or insufficient permissions"}), 401
+
+@app.route("/v1/experiments/chatbot", methods=["POST"])
+def experimental():
+  data = request.json
+
+  if not data.get("prompt"):
+    return jsonify({"error": "Prompt not found"}), 404
+
+  if not data.get("systemprompt"):
+    data["systemprompt"] = "You are a friendly assistant"
+
+  def generate():
+    completion = g4f.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        provider=g4f.Provider.GPTalk,
+        messages=[
+            {
+                "role": "system",
+                "content": data.get("systemprompt"),
+            },
+            {
+                "role": "user",
+                "content": data["prompt"]
+            },
+        ],
+        stream=True,
+    )
+
+    for chunk in completion:
+      yield f"{chunk}"
+    yield "event: stream-ended"
+
+  return Response(stream_with_context(generate()),
+                  content_type='text/event-stream'), 200
+
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8080)
