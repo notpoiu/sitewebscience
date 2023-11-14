@@ -6,7 +6,7 @@ from g4f.Provider import GPTalk
 # it is better to use the g4f library as it is free. Check out the repo here: https://github.com/xtekky/gpt4free
 
 # replace os.environ with your openai key
-#openai.api_key = os.environ['openaikey'] OPENAI METHOD, more recommended
+#openai.api_key = os.environ['openaikey'] #OPENAI METHOD, more recommended
 
 with open(os.path.join("data", "authkeys.json")) as f:
   authkeys = json.load(f)
