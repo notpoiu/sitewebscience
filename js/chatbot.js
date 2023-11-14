@@ -9,7 +9,7 @@ function createChatDiv(message, id){
     } else {
         pfp = "assets/user.svg";
     }
-    
+
     let chatWrapper = document.createElement("div");
     chatWrapper.classList.add("chat-wrapper");
     chatWrapper.id = id;
@@ -32,7 +32,7 @@ function createChatDiv(message, id){
     p.style.display = "inline-block";
     p.style.textAlign = "left";
     p.style.paddingTop = "0";
-    p.innerHTML = message.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    p.innerText = message;
 
     chatWrapper.appendChild(pfpChat);
     chatWrapper.appendChild(div);
@@ -271,7 +271,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                     const message = decoder.decode(value);
 
-                    console.log(paragraph);
                     if (message == "event: stream-ended"){
                         break;
                     }
