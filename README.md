@@ -1,8 +1,7 @@
 # Site web science
-Un projet de site web pour mon cours de science
-A website for my science project.
+un projet de site web pour mon cours de science
+a website for my science project.
 
-## backend code
-[Want to see backend code?](https://github.com/notpoiu/sitewebscience/tree/server-backend) <br>
-[Vous voulez voir le code du backend ?](https://github.com/notpoiu/sitewebscience/tree/server-backend)
+also i will be discontinuing the endpoint that communicates to chatgpt when i am done with this project so i dont need to pay allat 🗣️🗣️🗣️🗣️🗣️🗣️🔥🔥
 
+De plus, lorsque j'aurai terminé ce projet, je cesserai d'utiliser le point d'accès qui communique avec le chatgpt, ce qui me permettra de ne pas avoir à payer l'allat 🗣️🗣️🗣️🗣️🗣️🗣️🔥🔥

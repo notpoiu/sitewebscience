@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Évolution et taxonomie | Projet dont vous êtes le héros</title>
-        <base target="_blank">
+        
+        <!--<base href="https://edu.upio.dev/stanne/sciences/sec2/uv/project/project">-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.2/markdown-it.min.js"></script>
@@ -11,13 +12,102 @@
         <script src="js/chatbot.js"></script>
         <script src="js/article.js"></script>
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
         <link rel="stylesheet" href="css/styles.css">
     </head>
-    <body>
+    <body class="realbody">
         <div class="centertitle">
             <h1>Évolution et taxonomie;</h1>
             <h3>La base du progrès humain</h3>
             <h5 style="padding-top: 10px;"><i>par Nathan, Mark, Reza, Samuel</i></h5>
+        </div>
+
+        <div class="topbar">
+            <div class="right-down">
+                <input type="checkbox" class="checkbox" id="darkmode-checkbox">
+                <label for="darkmode-checkbox" class="checkbox-label">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                    <span class="ball"></span>
+                </label>
+                <script>
+                    if(localStorage.getItem('dark')=="true" || localStorage.getItem('dark')==true)
+                    {
+                        document.getElementById("darkmode-checkbox").checked=true;
+                        document.body.classList.toggle("dark-mode");
+
+                        const pfpChats = document.querySelectorAll(".pfp-chat");
+                        console.log(pfpChats);
+                        pfpChats.forEach((pfpChat)=>{
+                            console.log(pfpChat);
+                            pfpChat.style.transition = "background 0.2s linear";
+                            pfpChat.classList.toggle("dark-mode");
+                        });
+                    }
+
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const pfpChats = document.querySelectorAll(".pfp-chat");
+                        const chatinput = document.querySelector(".chat-input");
+                        const chatbotMostlyMainDiv = document.querySelector("#chatbotMostlyMainDiv");
+                        const tables = document.querySelectorAll("table");
+                        const topbar = document.querySelector(".topbar");
+
+                        console.log(Object.keys(tables).length);
+                        function toggleDarkMode(){
+                            document.body.style.transition = "background 0.2s linear";
+                            document.body.classList.toggle("dark-mode");
+
+                            chatinput.style.transition = "background 0.2s linear";
+                            chatinput.classList.toggle("dark-mode");
+
+                            chatbotMostlyMainDiv.style.transition = "background 0.2s linear";
+                            chatbotMostlyMainDiv.classList.toggle("dark-mode");
+
+                            topbar.style.transition = "background 0.2s linear";
+                            topbar.classList.toggle("dark-mode");
+
+                            pfpChats.forEach((pfpChat)=>{
+                                pfpChat.style.transition = "background 0.2s linear";
+                                pfpChat.classList.toggle("dark-mode");
+                            });
+
+                            tables.forEach((table)=>{
+                                table.style.transition = "background 0.2s linear";
+                                table.classList.toggle("dark-mode-table");
+                            });
+                        }
+
+                        if(localStorage.getItem('dark')=="true" || localStorage.getItem('dark')==true)
+                        {
+                            chatinput.classList.toggle("dark-mode");
+                            chatbotMostlyMainDiv.classList.toggle("dark-mode");
+
+                            pfpChats.forEach((pfpChat)=>{
+                                pfpChat.classList.toggle("dark-mode");
+                            });
+
+                            tables.forEach((table)=>{
+                                table.classList.toggle("dark-mode-table");
+                            });
+
+                            topbar.classList.toggle("dark-mode");
+
+                        }
+
+                        document.getElementById("darkmode-checkbox").addEventListener("change", ()=>{
+                            
+                            toggleDarkMode();
+
+                            if (document.body.classList.contains('dark-mode')){
+                                localStorage.setItem('dark',true);
+                            } else {
+                                localStorage.setItem('dark',false);
+                            }
+                        });
+                    });
+                </script>
+            </div>
+            <ul id="articlePopulate"></ul>
         </div>
 
         <article style="display: flex; justify-content: center; align-items: center;">
@@ -40,11 +130,11 @@
                 </div>
                 <div class="chat-input">
                     <button style="border: none; padding: 10px;width: 40px;height: 40px;border-radius: 10px;" id="reloadChat">
-                        <img src="assets/reload.svg" alt="send icon" style="width: 20px; height: 20px;">
+                        <img src="assets/reload.svg" class="no-invert" alt="send icon" style="width: 20px; height: 20px;">
                     </button>
                     <textarea class="text-ai-input" style="width: 70%;box-sizing: border-box;padding-bottom: 20px;" id="textboxAI"></textarea>
                     <button style="border: none; padding: 10px;width: 40px;height: 40px;border-radius: 10px;" id="sendAI">
-                        <img src="assets/send.svg" alt="send icon" style="width: 20px; height: 20px;" id="sendAIImg">
+                        <img src="assets/send.svg" alt="send icon" class="no-invert" style="width: 20px; height: 20px;" id="sendAIImg">
                     </button>
                 </div>
             </div>
@@ -53,7 +143,9 @@
         </div>
     
         <div class="attribution">
-            <p>Icones provenant de <a href="https://iconfinder.com">iconfinder</a><br>Site web fait par Nathan, <a href="https://github.com/notpoiu/sitewebscience/tree/main">code source sur <span style="display: inline-flex; align-items: center;">Github <img src="assets/gitbub.svg" alt="GitHub logo" style="width: 15px; height: 15px; margin-left: 5px;"></span></a></p>
+            <p>Icones provenant de <a target="_blank" href="https://iconfinder.com">iconfinder</a><br>Site web fait par Nathan, <a target="_blank" href="https://github.com/notpoiu/sitewebscience/tree/main">code source sur <span style="display: inline-flex; align-items: center;">Github <img src="assets/gitbub.svg" alt="GitHub logo" style="width: 15px; height: 15px; margin-left: 5px;"></span></a></p>
         </div>
+
+        <div class="padding"></div>
     </body>
 </html>

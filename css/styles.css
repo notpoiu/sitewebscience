@@ -1,11 +1,65 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat');
 
-body {
+.realbody {
+    background-color: white;
+    color: black;
+    font-family: 'Montserrat', Arial;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 300;
+    height: 100%;
+    scrollbar-width: none;
+}
+
+.realbody.dark-mode {
     background-color: black;
     color: white;
     font-family: 'Montserrat', Arial;
     -webkit-font-smoothing: antialiased;
     font-weight: 300;
+    height: 100%;
+    scrollbar-width: none;
+}
+
+.realbody.dark-mode textarea {
+    color: white;
+}
+
+table {
+    border: 1px solid black;
+    border-collapse: collapse !important;
+    text-align: center !important;
+}
+
+thread,tr,td,tbody,th {
+    border: 1px solid black ;
+    border-collapse: collapse !important;
+    text-align: center !important;
+}
+
+.dark-mode-table {
+    border: 1px solid white !important;
+    border-collapse: collapse !important;
+    text-align: center !important;
+}
+
+.realbody.dark-mode::-webkit-scrollbar {
+    display: none;
+}
+
+.realbody img {
+    filter: invert(100%);
+}
+
+.realbody img.no-invert {
+    filter: none;
+}
+
+.realbody.dark-mode img {
+    filter: invert(0%);
+}
+
+.realbody::-webkit-scrollbar {
+    display: none;
 }
 
 a {
@@ -14,16 +68,15 @@ a {
 }
 
 .attribution {
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     left: 15px;
     font-size: 12px;
-    color: white;
     text-decoration: none;
 }
 
 .centertitle {
-    padding-top: 10px;
+    padding-top: 50px;
     text-align: center;
 }
 
@@ -47,12 +100,20 @@ a {
 
 
 .chatbot {
-    position: absolute;
+    position: fixed;
     display: flex;
     flex-direction: column;
 
     right: 10px;
     bottom: 10px;
+}
+
+#chatbotMostlyMainDiv.dark-mode {
+    background-color: rgb(25, 25, 25);
+}
+
+#chatbotMostlyMainDiv {
+    background-color: #E5E9F0;
 }
 
 .chatbot >* {
@@ -71,21 +132,31 @@ a {
     align-self: flex-end;
 }
 
+
 .chat {
     width: 300px;
     height: 400px;
-    background-color: rgb(25, 25, 25);
     border-radius: 5px;
 }
 
 .pfp-chat {
-    background-color: black;
     position: relative;
-    
+    background-color: white;
+
     width: 40px;
     height: 40px;
     border-radius: 20px;
 }
+
+.pfp-chat.dark-mode {
+    position: relative;
+    background-color: black;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
 
 .chat-wrapper {
     display: flex;
@@ -133,11 +204,51 @@ a {
     display: none;
 }
 
+.topbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    background-color: #E5E9F0;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 1;
+}
+
+.topbar.dark-mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(25, 25, 25);
+    align-items: center;
+    padding: 0 10px;
+    z-index: 1;
+}
+
+#articlePopulate {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#articlePopulate li {
+    margin: 0 10px;
+}
+
 #mdArticle {
     overflow-y: scroll;
     -ms-overflow-style: none;
-    max-height: 450px;
-    min-height: none;
     height: auto;
     scrollbar-width: none;
 }
@@ -146,6 +257,9 @@ a {
     display: none;
 }
 
+.padding {
+    padding: 30px;
+}
 
 .text-ai-input {
     width: 100%;
@@ -157,7 +271,6 @@ a {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
     padding-left: 10px;
     resize: none;
     -ms-overflow-style: none;
@@ -172,13 +285,29 @@ a {
     display: none;
 }
 
-.chat-input {
+.chat-input.dark-mode {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 93.5%;
     height: 15%;
     background-color: rgb(25, 25, 25);
+    color: white;
+    border-radius: 0 0 5px 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.chat-input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 93.5%;
+    height: 15%;
+    background-color: #E5E9F0;
+    color: black;
     border-radius: 0 0 5px 5px;
     display: flex;
     justify-content: space-between;
@@ -203,5 +332,51 @@ a {
     color: white;
     font-size: 16px;
     cursor: pointer;
+}
+
+.checkbox-div * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.checkbox {
+    opacity: 0;
+    position: absolute;
+}
+
+.checkbox-label {
+    background-color: rgb(55, 55, 55);
+    width: 50px;
+    height: 24px;
+    border-radius: 50px;
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fa-moon {color: #f1c40f;}
+.fa-sun {color: #f39c12;}
+
+.checkbox-label .ball {
+    background-color: #fff;
+    width: 29px;
+    height: 29px;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+    transform: translateX(26px);
 }
 
